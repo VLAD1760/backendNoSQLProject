@@ -1,18 +1,24 @@
-const getTareas = (req, res) => {
+const aysncHandler = require('express-async-handler')
+
+const getTareas = aysncHandler(async (req, res) => {
     res.status(200).json({ message: "Obtener Tareas" })
-}
+})
 
-const setTareas = (req, res) => {
+const setTareas = aysncHandler(async (req, res) => {
+    if (!req.body.texto) {
+        res.status(400)
+        throw new Error("Por favor teclea una description")
+    }
     res.status(201).json({ message: "crear Tareas" })
-}
+})
 
-const updateTareas = (req, res) => {
+const updateTareas = aysncHandler(async (req, res) => {
     res.status(200).json({ message: `Modificar la tarea numero ${req.params.id}` })
-}
+})
 
-const deleteTareas = (req, res) => {
+const deleteTareas = aysncHandler(async (req, res) => {
     res.status(200).json({ message: `Eliminar la tarea numero ${req.params.id}` })
-}
+})
 
 module.exports = {
     getTareas, 
